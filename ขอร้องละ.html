@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>แบบประเมินความเครียด ST-5</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        function startAssessment() {
+            document.getElementById('home').classList.add('hidden');
+            document.getElementById('assessment').classList.remove('hidden');
+        }
+
+        function submitAssessment() {
+            let score = 0;
+            document.querySelectorAll('input[type=radio]:checked').forEach(radio => {
+                score += parseInt(radio.value);
+            });
+            let resultText;
+            if (score <= 4) resultText = 'คุณมีความเครียดน้อย';
+            else if (score <= 7) resultText = 'คุณมีความเครียดปานกลาง';
+            else if (score <= 9) resultText = 'คุณมีความเครียดมาก';
+            else resultText = 'คุณมีความเครียดมากที่สุด';
+            document.getElementById('assessment').classList.add('hidden');
+            document.getElementById('result').classList.remove('hidden');
+            document.getElementById('result-text').innerText = resultText;
+        }
+    </script>
+</head>
+<body class="bg-green-100 flex items-center justify-center min-h-screen">
+    <div id="home" class="bg-white p-6 rounded-2xl shadow-lg w-96 text-center">
+        <h1 class="text-2xl font-bold text-green-600">แบบประเมินความเครียด (ST-5)</h1>
+        <p class="text-gray-600 mt-2">ในวิทยาลัยพยาบาลบรมราชชนนี พระพุทธบาท</p>
+        <button onclick="startAssessment()" class="mt-4 bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600">เริ่มการประเมิน</button>
+    </div>
+
+    <div id="assessment" class="hidden bg-white p-6 rounded-2xl shadow-lg w-96 text-center">
+        <h2 class="text-xl font-bold text-green-600">ความเครียดเกิดได้กับทุกคน</h2>
+        <p class="text-gray-600 mt-2">สาเหตุที่ทำให้เกิดความเครียดมีหลายอย่าง 0=เป็นน้อยมากหรือแทบไม่มี 1=เป็นบางครั้ง 2=เป็นบ่อยครั้ง 3=เป็นประจำ</p>
+        <form>
+            <div class="mt-4 text-left">
+                <p>1. มีปัญหาการนอน นอนไม่หลับหรือนอนมาก</p>
+                <label><input type="radio" name="q1" value="0"> 0</label>
+                <label><input type="radio" name="q1" value="1"> 1</label>
+                <label><input type="radio" name="q1" value="2"> 2</label>
+                <label><input type="radio" name="q1" value="3"> 3</label>
+            </div>
+            <div class="mt-4 text-left">
+                <p>2. มีสมาธิน้อย</p>
+                <label><input type="radio" name="q2" value="0"> 0</label>
+                <label><input type="radio" name="q2" value="1"> 1</label>
+                <label><input type="radio" name="q2" value="2"> 2</label>
+                <label><input type="radio" name="q2" value="3"> 3</label>
+            </div>
+            <div class="mt-4 text-left">
+                <p>3. หงุดหงิด กระวนกระวาย ว้าวุ่นใจ</p>
+                <label><input type="radio" name="q3" value="0"> 0</label>
+                <label><input type="radio" name="q3" value="1"> 1</label>
+                <label><input type="radio" name="q3" value="2"> 2</label>
+                <label><input type="radio" name="q3" value="3"> 3</label>
+            </div>
+            <div class="mt-4 text-left">
+                <p>4. รู้สึกเบื่อเซ็ง</p>
+                <label><input type="radio" name="q4" value="0"> 0</label>
+                <label><input type="radio" name="q4" value="1"> 1</label>
+                <label><input type="radio" name="q4" value="2"> 2</label>
+                <label><input type="radio" name="q4" value="3"> 3</label>
+            </div>
+            <div class="mt-4 text-left">
+                <p>5. ไม่อยากพบปะผู้คน</p>
+                <label><input type="radio" name="q5" value="0"> 0</label>
+                <label><input type="radio" name="q5" value="1"> 1</label>
+                <label><input type="radio" name="q5" value="2"> 2</label>
+                <label><input type="radio" name="q5" value="3"> 3</label>
+            </div>
+        </form>
+        <button onclick="submitAssessment()" class="mt-4 bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600">ส่งคำตอบ</button>
+    </div>
+
+    <div id="result" class="hidden bg-white p-6 rounded-2xl shadow-lg w-96 text-center">
+        <h2 class="text-xl font-bold text-green-600">ผลการประเมิน</h2>
+        <p id="result-text" class="text-gray-600 mt-2"></p>
+    </div>
+</body>
+</html>
